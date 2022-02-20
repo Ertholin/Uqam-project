@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Dashboard">
+<meta name="keyword"
+	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+<title>SevisPam management</title>
+
+<!-- Favicons -->
+<link th:href="@{/libs/img/favicon.png}" rel="icon">
+<link th:href="@{/libs/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+<!-- Bootstrap core CSS -->
+<link th:href="@{/libs/lib/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
+<!--external css-->
+<link th:href="@{/libs/lib/font-awesome/css/font-awesome.css}"
+	rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/libs/css/zabuto_calendar.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/libs/lib/gritter/css/jquery.gritter.css}" />
+<!-- Custom styles for this template -->
+<link th:href="@{/libs/css/style.css}" rel="stylesheet">
+<link th:href="@{/libs/css/style-responsive.css}" rel="stylesheet">
+<script th:src="@{/libs/lib/chart-master/Chart.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<!-- ============================================================================================================= -->
+</head>
+
+<body>
+	<section id="container">
+
+		<!--header start-->
+		<header class="header black-bg">
+			<div class="sidebar-toggle-box">
+				<div class="fa fa-bars tooltips" data-placement="right"
+					data-original-title="Toggle Navigation"></div>
+			</div>
+			<!--logo start-->
+			<a th:href="@{/index}" class="logo"><b><img
+					th:src="@{/libs/img/logos.png}"></b></a>
+			<!--logo end-->
+			
+			
+			<div sec:authorize="isAuthenticated()" class="top-menu">
+				<form id="logoutForm" method="POST" th:action="@{/logout}">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				</form>
+				<ul class="nav pull-right top-menu">
+					<li>
+						<a style="border-color: white;" class="logout" onclick="document.forms['logoutForm'].submit()"><i class="fa fa-sign-out" aria-hidden="true"></i>Deconnecter</a>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<!--header end-->
+		<!-- **********************************************************************************************************************************************************
+        MAIN SIDEBAR MENU
+        *********************************************************************************************************************************************************** -->
+		<!--sidebar start-->
+		
+		<aside>
+			<div id="sidebar" class="nav-collapse ">
+				<!-- sidebar menu start-->
+				<ul class="sidebar-menu" id="nav-accordion">
+					<p class="centered">
+						<a th:href="@{/profile.html}"><img
+							th:src="@{/libs/img/1.jpg}" class="img-circle" width="80"></a>
+					</p>
+					
+					<h5 class="centered" sec:authentication="name"> User</h5>
+					<h6 class="centered" sec:authentication="principal.authorities"> Roles</h6>
+					<!-- <h3 th:text="${#authentication.getPrincipal().getNom()}"></h3> -->
+					
+			<!-- <span sec:authorize="isAuthenticated()">
+                | Logged user: <span sec:authentication="name"></span> |
+                Roles: <span sec:authentication="principal.authorities"></span> |
+                <a th:href="@{/logout}">Sign Out</a>
+            </span> -->
+					
+					<li class="mt"><a class="active"
+						th:href="@{/professionnel}"> <i
+							class="glyphicon glyphicon-home"></i> <span>Accueil</span>
+					</a></li>
+					<li class="sub-menu"><a th:href="@{/infosProfessionnel}"> <i
+							class="fa fa-user-circle"></i> <span>Infos Personnels</span>
+					</a></li>
+					<li class="sub-menu"><a th:href="@{/mesProfiles}"> <i
+							class="fa fa-sitemap"></i> <span>Mes Profiles</span>
+					</a>
+						<!-- <ul class="sub">
+							<li><a th:href="@{/#}">Vendre</a></li>
+							<li><a th:href="@{/#}">Loueur</a></li>
+							<li><a th:href="@{/#}">Vacances</a></li>
+						</ul></li> -->
+					<li class="sub-menu"><a th:href="@{/addProfile}">
+							<i class="fa fa-plus-circle"></i> <span>Ajouter profile</span>
+					</a></li>
+					<li class="sub-menu"><a th:href="@{/javascript}"> <i
+							class="fa fa-cogs"></i> <span>Paramètres</span>
+					</a></li>
+				</ul>
+				<!-- sidebar menu end-->
+			</div>
+		</aside>
+<!-- 		<aside>
+			<div id="sidebar" class="nav-collapse ">
+				sidebar menu start
+				<ul class="sidebar-menu" id="nav-accordion">
+					<p class="centered">
+						<a th:href="@{/profile.html}"><img
+							th:src="@{/libs/img/junior.png}" class="img-circle" width="80"></a>
+					</p>
+					<h5 class="centered" sec:authentication="name"> User</h5>
+					<li class="mt"><a class="active"
+						th:href="@{/proprietaire}"> <i
+							class="glyphicon glyphicon-home"></i> <span>Accueil</span>
+					</a></li>
+					<li class="sub-menu"><a th:href="@{/javascript}"> <i
+							class="fa fa-user-circle"></i> <span>Infos Personnels</span>
+					</a></li>
+					<li class="sub-menu"><a th:href="@{/javascript}"> <i
+							class="fa fa-sitemap"></i> <span>Mes propriétés</span>
+					</a>
+						<ul class="sub">
+							<li><a th:href="@{/#}">Vendre</a></li>
+							<li><a th:href="@{/#}">Loueur</a></li>
+							<li><a th:href="@{/#}">Vacances</a></li>
+						</ul></li>
+					<li class="sub-menu"><a th:href="@{/ajouterPropriete}">
+							<i class="fa fa-plus-circle"></i> <span>Ajouter propriété</span>
+					</a></li>
+					<li class="sub-menu"><a th:href="@{/javascript}"> <i
+							class="fa fa-cogs"></i> <span>Parametres</span>
+					</a></li>
+				</ul>
+				sidebar menu end
+			</div>
+		</aside> -->
+		<!--sidebar end-->
+		<!-- ****************MAIN CONTENT******************************************************************************************************* -->
+		<!--main content start-->
+		<section id="main-content">
+			<section class="wrapper site-min-height">
+				<div class="row mt mb">
+					<div class="row mt">
+						<div class="col-lg-12">
+							<div class="form-panel">
+								<h4 class="mb">
+									<i class="fa fa-plus-circle"></i>Créer un profile</h4>
+								<form class="form-horizontal tasi-form" th:action="@{/addProfile}" method="post" enctype="multipart/form-data">
+											<table width="100%">
+										<tr>
+											<td width="50%">
+											
+											  <div class="form-group row">
+											    <label for="txtInitialsAdd" class="col-sm-4 col-form-label">Nom Professionnel/ Nom Entreprise: </label>
+											    <div class="col-sm-6">
+											      <input type="text" class="form-control" id="txtInitialsAdd" name="username" placeholder="Username" required>
+											    </div>
+											  </div>
+											  
+											 <div class="form-group row">
+											    <label for="txtBioAdd" class="col-sm-4 col-form-label">Bio</label>
+											    <div class="col-sm-6">
+											      <textarea class="form-control" id="txtBioAdd" name="bio" placeholder="Bio" rows="2"></textarea>
+											    </div>
+											  </div>
+											  
+											  <div class="form-group row">
+											    <label for="txtPhoneAdd" class="col-sm-4 col-form-label">Téléphone Professionnel: </label>
+											    <div class="col-sm-6">
+											      <input type="tel" class="form-control" id="txtSSNAdd" name="telephone" placeholder="50931111111"  required>
+											    </div>
+											  </div>
+											  
+											 <div class="form-group row">
+											    <label for="txtDepartementAdd" class="col-sm-4 col-form-label">Département: </label>
+											    <div class="col-sm-6">
+												    <select class="form-control" id="ddDepartementAdd" name="departement"  required>
+												          <option>-SELECT-</option>
+												          <option>Ouest</option>
+							  							  <option>Nord</option>
+							  							  <option>Sud</option>
+							  							  <option>Est</option>
+							  							  <option>Sud-Est</option>
+							  							  <option>Nippes</option>
+							  							  <option>Grand'Anse</option>
+							  							  <option>Centre</option>
+							  							  <option>Nord-Ouest</option>
+							  							  <option>Nord-Est</option>
+							  							  
+												    </select>				    
+											    </div>
+											  </div>
+											  
+											  <div class="form-group row">
+											    <label for="txtCommuneAdd" class="col-sm-4 col-form-label">Commune: </label>
+											    <div class="col-sm-6">
+											      <input type="text" class="form-control" id="txtCommuneAdd" name="commune" placeholder="Commune" required>
+											    </div>
+											  </div>
+											  
+											  
+											  
+											  <div class="form-group row">
+											    <label for="txtAddressAdd" class="col-sm-4 col-form-label">Address</label>
+											    <div class="col-sm-6">
+											      <textarea class="form-control" id="txtAddressAdd" name="adresse" placeholder="Address" rows="2"  required></textarea>
+											    </div>
+											  </div>
+											  
+							
+											</td>
+											<td width="50%" style="padding-left:10px">
+											  
+											<div class="form-group row">
+											    <label for="txtProfessionAdd" class="col-sm-4 col-form-label">Profession: </label>
+											    <div class="col-sm-6">
+												    <select class="form-control" id="ddProfessionAdd" name="profession"  required>
+												          <option>-SELECT-</option>
+												          <option>Mécanicien</option>
+							  							  <option>Electricien Auto</option>
+							  							  <option>Electricien Bâtiment</option>
+							  							  <option>Plombier</option>
+							  							  <option>Menuisier</option>
+							  							  <option>Pâtissier(ère)</option>
+							  							  <option>Infirmier(ère)</option>
+							  							  <option>Auxilière Infirmier(ère)</option>
+							  							  <option>Masseur</option>
+							  							  <option>Photographe</option>
+							  							  <option>Vidéographe</option>
+							  							  <option>Maquilleur(e)</option>
+							  							  <option>Ingénieur Civil</option>
+							  							  <option>Maçon</option>
+							  							  <option>Carréleur</option>
+							  							  <option>Electronicien</option>
+							  							  <option>Technicien Informatique</option>
+							  							  <option>Dépanneur Cellulaire</option>
+							  							  <option>Jardinière</option>
+							  							  <option>Instituteur</option>
+							  							  <option>Fleuriste</option>
+							  							  <option>Couturier(ère)</option>
+							  							  <option>Ferailleur</option>
+							  							  <option>Dépanneur Cellulaire</option>
+							  							  <option>Secrétaire Bureautique</option>
+							  							  <option>Estéticien</option>
+							  							  <option>Blanchisseur</option>
+							  							  <option>Technicien de Laboratoire Médicale</option>
+							  							  <option>Blanchisseur</option>
+							  							  <option>Maquilleur</option>
+							  							  <option>Danseur(euse)</option>
+							  							  <option>Moniteur Sportif</option>
+							  							  <option>Macrameur</option>
+							  							  <option>Calligraphe</option>
+							  							  <option>Potier(ère)</option>
+							  							  <option>Hetellier(ère)</option>
+							  							  <option>Beat Maker</option>
+							  							  <option>DJ</option>
+												    </select>				    
+											    </div>
+											  </div>
+											  
+											  <div class="form-group row">
+											    <label for="txtDateOfBirthAdd" class="col-sm-4 col-form-label">Date de Naissance:</label>
+											    <div class="col-sm-6">
+											      <input type="date" class="form-control" id="txtDateOfBirthAdd" name="DateOfBirth" placeholder="Date of Birth">
+											    </div>
+											  </div>
+							
+											  <div class="form-group row">
+											    <label for="txtEmailAdd" class="col-sm-4 col-form-label">Email Professionnel</label>
+											    <div class="col-sm-6">
+											      <input type="email" class="form-control" id="txtEmailAdd" name="email" placeholder="Email"  required>
+											    </div>
+											  </div>
+											  
+											 <div class="form-group row">
+											    <label for="txtSiteAdd" class="col-sm-4 col-form-label">Site Internet: </label>
+											    <div class="col-sm-6">
+											      <input type="text" class="form-control" id="txtSiteAdd" name="site" placeholder="l'URL de votre Site Internet">
+											    </div>
+											 </div>
+											 
+											 <div class="form-group row">
+											    <label for="txtLinkedinAdd" class="col-sm-4 col-form-label">Compte LinkedIn: </label>
+											    <div class="col-sm-6">
+											      <input type="text" class="form-control" id="txtLinkedinAdd" name="linkedin" placeholder="Compte Linkedin">
+											    </div>
+											  </div>
+											  
+											 <div class="form-group row">
+											    <label for="txtFacebookAdd" class="col-sm-4 col-form-label">Page Facebook: </label>
+											    <div class="col-sm-6">
+											      <input type="text" class="form-control" id="txtFacebookAdd" name="facebook" placeholder="Page Facebook">
+											    </div>
+											  </div>
+											  
+									<div class="form-group row">
+										<label class="col-sm-4 col-form-label">Photo</label>
+										<div class="col-sm-6">
+											<input type="file" class="form-control choose-file" name="file" id="fileImage" accept="image/png, image/jpeg">
+										</div>
+									</div>
+							
+											</td>
+
+										</tr>		
+											
+									</table>
+										
+									
+									 <hr>
+									
+									<div class="showbac" align="center">
+										<input type="submit" class="btn btn-primary btn-space"
+											value="Enregistrer">
+										<button type="reset" class="btn btn-danger btn-space">Annuler</button>
+									</div>
+									
+									<div th:if="${param.error}" style="color:red;margin:10px 0px; text-align:center;">
+        		<div class="alert alert-danger" th:text="${messageFileExceed}"></div>
+       		</div>					
+								
+								</form>
+							</div>
+							<!-- /form-panel -->
+						</div>
+						<!-- /col-lg-12 -->
+					</div>
+					<!--  /col-lg-12 -->
+				</div>
+				<!--  /row -->
+			</section>
+			<!-- /wrapper -->
+		</section>
+		<!--main content end-->
+		<!--footer start-->
+
+		<!--footer end-->
+	</section>
+	<!-- js placed at the end of the document so the pages load faster -->
+	<script th:src="@{/libs/lib/jquery/jquery.min.js}"></script>
+
+	<script th:src="@{/libs/lib/bootstrap/js/bootstrap.min.js}"></script>
+	<script class="include" type="text/javascript"
+		th:src="@{/libs/lib/jquery.dcjqaccordion.2.7.js}"></script>
+	<script th:src="@{/libs/lib/jquery.scrollTo.min.js}"></script>
+	<script th:src="@{/libs/lib/jquery.nicescroll.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/libs/lib/jquery.sparkline.js}"></script>
+	<!--common script for all pages-->
+	<script th:src="@{/libs/lib/common-scripts.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/libs/lib/gritter/js/jquery.gritter.js}"></script>
+	<script type="text/javascript" th:src="@{/libs/lib/gritter-conf.js}"></script>
+	<!--script for this page-->
+	<script th:src="@{/libs/lib/sparkline-chart.js}"></script>
+	<script th:src="@{/libs/lib/zabuto_calendar.js}"></script>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							var unique_id = $.gritter
+									.add({
+										// (string | mandatory) the heading of the notification
+										title : 'Bienvenue !',
+										// (string | mandatory) the text inside the notification
+										text : 'Nous vous remercions de choisir Sevis Pam comme plateforme numerique pour votre business.Placer le curseur sur le message pour pouvoir annuler',
+										// (string | optional) the image to display on the left
+										image : '../libs/img/junior.png',
+										// (bool | optional) if you want it to fade out on its own or just sit there
+										sticky : false,
+										// (int | optional) the time you want it to be alive for before fading out
+										time : 8000,
+										// (string | optional) the class name you want to apply to that specific message
+										class_name : 'my-sticky-class'
+									});
+
+							return false;
+							
+							$('#fileImage').change(function(){
+								showImageThumbnail(this);
+							});
+		
+						});
+		
+    	function showImageThumbnail(fileInput){
+    		file = fileInput.files[0];
+    		reader = new FileReader();
+    		reader.onload = function(e){
+    			$('#thumbnail').attr('src', e.target.result);
+    			
+    		};
+    		reader.readAsDataURL(file);
+    	}
+    	
+
+	</script>
+
+	<script type="application/javascript">
+		
+            $(document).ready(function() {
+            $("#date-popover").popover({
+            html: true,
+            trigger: "manual"
+            });
+            $("#date-popover").hide();
+            $("#date-popover").click(function(e) {
+            $(this).hide();
+            });
+
+            $("#my-calendar").zabuto_calendar({
+            action: function() {
+            return myDateFunction(this.id, false);
+            },
+            action_nav: function() {
+            return myNavFunction(this.id);
+            },
+            ajax: {
+            url: "show_data.php?action=1",
+            modal: true
+            },
+            legend: [{
+            type: "text",
+            label: "Special event",
+            badge: "00"
+            },
+            {
+            type: "block",
+            label: "Regular event",
+            }
+            ]
+            });
+            });
+
+            function myNavFunction(id) {
+            $("#date-popover").hide();
+            var nav = $("#" + id).data("navigation");
+            var to = $("#" + id).data("to");
+            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+            }
+            
+        
+	</script>
+
+</body>
+
+</html>

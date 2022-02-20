@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Affordable and professional web design">
+	  <meta name="keywords" content="web design, affordable web design, professional web design">
+  	<meta name="author" content="Brad Traversy">
+    <title>Sevis Pam | About</title>
+    <link rel="stylesheet" href="./css/styleGnle.css">
+    <style>
+      #imgapropos{
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+        text-align: center;
+      }
+
+      .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+        margin-bottom: 10px;
+      }
+
+      .active, .accordion:hover {
+        background-color: #ccc;
+      }
+
+      .accordion:after {
+        content: '\002B';
+        color: #777;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+      }
+
+      .active:after {
+        content: "\2212";
+      }
+
+      .panel {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        text-align: justify;
+      }
+      .panel p{
+        padding-bottom: 20px;
+        font-size: 13px;
+        text-align: justify;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div id="branding">
+          <h1><span class="highlight">Sevis Pam</span></h1>
+        </div>
+        <nav>
+          <ul>
+            <li><a th:href="@{/index}">Accueil</a></li>
+            <li class="current"><a th:href="@{/about}">Apropos</a></li>
+            <li><a th:href="@{/services}">Services</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div id="imgapropos" style="">
+        <img style="width: 100%;" th:src="@{/assets/img/QUISOMMESNOUS-faad0f26.jpg}"/>
+    </div>
+    <br/><br/>
+    <section id="main">
+      <div class="container">
+        <article id="main-col">
+          <h1 class="page-title"> Sevis Pam : Mission & Vision</h1><br/>
+          <p style="color: black; font-size: 14px; text-align: justify;">
+            Sevis Pam est une startup spécialiste de la gestion immobilière en Haiti. Notre mission est d’offrir à chacun de nos utilisateurs, une expérience immobilière simple et efficace afin qu’ils concrétisent leurs projets d’achat, de vente ou de location en toute sérénité. Un suivi complet juridique, un accompagnement personnalisé pour chaque propriétaire, et le recouvrement garanti des loyers sans se soucier des problèmes. Avec un réseau de plus de 2.500 agents immobiliers professionnels partenaires, Sevis Pam met à votre disposition de plus larges choix d’annonces afin de faciliter la recherche d’un bien selon des critères propres aux utilisateurs de sa plateforme. Notre ambition est de proposer une expérience personnalisée adaptée aux besoins de chacun afin que chaque vie soit plus simple. Avec Sevis Pam , c’est l’immobilier autrement.
+          </p>
+        </article>
+
+        <aside id="sidebar">
+          <div class="dark">
+            <h3>Une transaction en toute sécurité</h3>
+            <p>Sevis Pam  ayant connaissance des règles à respecter sur les transactions immobilières se charge des démarches administratives ainsi que des diagnostics à effectuer.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <br/><br/>
+    <div class="container">
+      <h3>FAQ</h3>
+      <br/><br/>
+      <button class="accordion">Quelle est l’audience de Sevis Pam ?</button>
+      <div class="panel">
+        <p>Sevis Pam est un site immobilier Haitien . Plusieurs milliers de personnes à la recherche d'un logement vont consulter nos annonces chaque mois !</p>
+      </div>
+
+      <button class="accordion">Quelles sont les conditions générales pour louer sur Sevis Pam ?</button>
+      <div class="panel">
+        <p>Afin de pouvoir louer chez Sevis Pam, vous devez être majeur, avoir la pleine capacité juridique permettant de vous engager.</p>
+      </div>
+
+      <button class="accordion">Comment mettre mon appartement en location grâce à Sevis Pam ?</button>
+      <div class="panel">
+        <p>Pour nous proposer votre logement, il suffit simplement de nous envoyer un mail avec un descriptif succinct de votre bien et des photos de chaque pièce. Après avoir examiné votre dossier, si votre bien correspond à nos critères, nous conviendrons d’un rendez-vous sur place.</p>
+      </div>
+      <div>
+        <button class="accordion">Que faire en cas de dégâts dans l’appartement ?</button>
+        <div class="panel">
+          <p>Les appartements sont loués dans un très bon état général. Il est obligatoire de nous contacter en cas de dégât/casse durant votre séjour, afin de pouvoir mettre en place une solution (du simple remplacement, à la responsabilité des assurances).</p>
+        </div>
+      </div>
+      <div>
+        <button class="accordion">Quels aménagements sont nécessaires ?</button>
+        <div class="panel">
+          <p>Votre logement doit correspondre à nos critères de sélection et être attractif pour nos locataires. L'appartement que vous nous confiez doit correspondre à notre clientèle en recherche de biens de standing, tout confort. Vous pouvez déjà comparer le bien que vous souhaitez nous confier à nos annonces déjà en ligne pour vous faire une idée. Aussi grâce à notre équipe d'artisans partenaires, nous vous proposons d'aménager votre bien et de le meubler pour vous garantir un bon retour sur investissement avec un bon rapport qualité prix et délais.</p>
+        </div>
+      </div>
+
+      <div>
+        <button class="accordion">Quelle garantie est demandée auprès du locataire ?</button>
+        <div class="panel">
+          <p>Pour chaque réservation, une caution est demandée par LogerChic au locataire afin de vous garantir une sécurité. Elle sera entièrement gérée par nos soins. Il est d'ailleurs proposé et demandé au locataire de prendre une assurance personnelle sur le bien loué. La caution est fonction du bien loué, de la surface et de la durée.</p>
+        </div>
+      </div>
+
+      <div>
+        <button class="accordion">Comment puis-je obtenir une facture ?</button>
+        <div class="panel">
+          <p>Une facture vous sera envoyée par email à la fin de votre séjour.</p>
+        </div>
+      </div>
+
+      <div>
+        <button class="accordion">Puis-je changer les dates de réservation facilement ?</button>
+        <div class="panel">
+          <p>En cas de demande de prolongation de séjour, il vous suffit simplement de nous contacter afin que nous puissions vous informer des disponibilités de l’appartement. En cas d'annulation de la réservation, il est possible que des frais vous soient exigés. Le détail de ceux-ci est indiqué dans les conditions générales de vente.</p>
+        </div>
+      </div>
+
+      <div>
+        <button class="accordion">Quels sont les indispensables ?</button>
+        <div class="panel">
+          <p>Lors de l'envoi de votre dossier à LogerChic (photos de chaque pièce et descriptif), vous pourrez nous envoyer un inventaire complet des ameublements de votre bien. Nous sommes à votre disposition pour échanger avec vous lors de la visite et vous conseiller sur les indispensables nécessaires concernant l'équipement et le confort de vos locataires.</p>
+        </div>
+      </div>
+
+      <div>
+        <button class="accordion">Quelles sont les formalités administratives à réaliser ?</button>
+        <div class="panel">
+          <p>En tant que bénéficiaire du service LogerChic, vous devez être propriétaire de l'immeuble, avoir la pleine capacité juridique permettant de vous engager, vous assurer que tout fonctionne, être à jour de vos abonnements divers afin de ne pas être dérangé pendant le séjour des locataires. Aussi, nous pourrons vous aider à déclarer votre bien en mairie.</p>
+        </div>
+      </div>
+    </div>
+    <br/><br/><br/><br/><br/><br/>
+
+    <footer class="footer">
+      <div class="container"><br><br><br><br><br><br>
+        <div class="row">
+          <div class="footer-col">
+            <h4>Sevis pam</h4>
+            <ul>
+              <li><a href="#">apropos de nous</a></li>
+              <li><a href="#">Notre services</a></li>
+              <li><a href="#">Politique de confidentialite</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Obtenir de l'aide</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Lorem ipsum</a></li>
+              <li><a href="#">Options de paiement</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Suivez-nous</h4>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+   </footer>
+
+    <script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var panel = this.nextElementSibling;
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

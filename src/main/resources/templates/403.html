@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sevis pam | Welcome</title>
+    <link rel="stylesheet" href="./css/styleGnle.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
+    <link rel="stylesheet" href=" https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <!-- <div id="branding">
+          <h1><span class="highlight">Sevis</span> Pam</h1>
+        </div> -->
+        <nav>
+          <ul>
+            <li class="current"><a th:href="@{/index}">Accueil</a></li>
+            <li><a th:href="@{/about}">A propos</a></li>
+            <li><a th:href="@{/services}">Services</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+	
+	<h1 class="text-center brand-h1">Sevis PAM 403 - Access is denied</h1>
+	<div th:inline="text">Oops ! Désolé '[[${#httpServletRequest.remoteUser}]]', 
+                Vous ne pouvez pas accéder à cette page.</div>
+
+    <footer class="footer">
+      <div class="container"><br><br><br><br><br><br>
+        <div class="row">
+          <div class="footer-col">
+            <h4>Sevis pam</h4>
+            <ul>
+              <li><a href="#">apropos de nous</a></li>
+              <li><a href="#">Notre services</a></li>
+              <li><a href="#">Politique de confidentialite</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Obtenir de l'aide</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Lorem ipsum</a></li>
+              <li><a href="#">Options de paiement</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Suivez-nous</h4>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+   </footer>
+  </body>
+</html>

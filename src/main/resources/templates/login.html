@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Login</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" th:href="@{/css/styleLogin.css}">
+   <!--  <script th:src="@{/main.js}"></script> -->
+    <link rel='stylesheet' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+</head>
+<body>
+<div class="container">
+    <input type="checkbox" id="flip">
+    <div class="cover">
+        <div class="front">
+            <img th:src="@{/img/imagesfont2.jpg}" alt="">
+            <div class="text">
+                <span class="text-1">Votre maison,</br> on la voit comme vous</span>
+                <span class="text-2">Connectez-vous maintenant</span>
+            </div>
+        </div>
+        <div class="back">
+            <img class="backImg" th:src="@{/img/imagesfont3.jpg}" alt="">
+            <div class="text">
+                <span class="text-1">Votre maison,</br> on la voit comme vous</span>
+                <span class="text-2">Connectez-vous maintenant</span>
+            </div>
+        </div>
+    </div>
+    
+     <div>
+
+        <form class="form-signin" method="POST" th:action="@{/login}">
+        	<div class="form-content">
+            	<div class="login-form">
+               	
+                    <div class="title"><a th:href="@{/index}" class="logo"><b><img
+					th:src="@{/libs/img/logos.png}"></b></a>Se connecter</div>
+                    <div class="input-boxes">
+                        <div class="input-box">
+                            <i class="fas fa-user"></i>
+                            <input type="text" name="username" placeholder="Username" required/>
+                        </div>
+                        <div class="input-box">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" name="password" placeholder="Password" required/>
+                        </div>
+                        
+	                <!-- <div class="input-boxes">
+					  <i class="fas fa-lock">Type de Compte</i>
+					    <div class="input-boxes">
+						    <select class="input-box" name="userType">
+			        	       <option class="input-box">-SELECT-</option>			    					  					    					    
+						       <option>Proprietaire</option>
+						       <option>Professionnel</option>					    
+							</select>				    
+					    </div>
+				  </div> -->
+                        
+                        
+                        <div style="color:red;margin:10px 0px;">
+        					<div class="alert alert-danger"><span class="has-error" th:text="${error}"></span></div>
+       					</div>
+                        
+                        <div class="text sign-up-text">Nom utilisateur ou mot de passe oublie?<label for="flip">Récupérer.</label>
+                        </div>
+                        <div class="button input-box">
+                            <input class="btn btn-sm btn-primary btn-block" type="submit" value="Envoyer"/>
+                        </div>
+                        <div class="text">Pas de compte?<a th:href="@{registration}">Créer un compte.</a></div>
+                         <div style="color:red;margin:10px 0px;">
+        					<div class="alert alert-danger"><span class="has-error" th:text="${message}"></span></div>
+       					</div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="signup-form">
+                <form method="" action="">
+                    <div class="title">Récupérer un compte</div>
+                    <div class="input-boxes">
+                        <div class="input-box">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Entrer votre nom utilisateur" required/>
+                        </div>
+                        <div class="input-box">
+                            <i class="fas fa-envelope"></i>
+                            <input type="text" placeholder="Entrer votre mail" required/>
+                        </div>
+                        <div class="input-box">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" placeholder="Entrer votre mot de passe" required/>
+                        </div>
+                        <div class="button input-box">
+                            <input type="submit" value="Envoyer"/>
+                        </div>
+                        <div class="text sign-up-text">Compte trouver?<label for="flip">Connecter maintenant.</label>
+                        </div>
+                    </div>
+                    </form>
+            </div>
+            
+        
+</div> 
+</body>
+
+
+
+
+

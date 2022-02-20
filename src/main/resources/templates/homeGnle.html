@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sevis pam | Welcome</title>
+    <link rel="stylesheet" href="./css/styleGnle.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
+    <link rel="stylesheet" href=" https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <ul>
+            <li class="current"><a th:href="@{/index}">Accueil</a></li>
+            <li><a th:href="@{/about}">A propos</a></li>
+            <li><a th:href="@{/services}">Services</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section id="showcase">
+      <div class="container">
+        <h1 class="h1">Sèvis Pam est à votre service</h1>
+        <p class="p" style="font-size: 16px;">
+        SEVIS-PAM  est une plateforme numérique B2B, B2C (en version web et mobile) qui permet à des utilisateurs de ne plus 
+        avoir à se déplacer pour chercher un terrain, une chambre d’hôtel, un appartement ou une maison à louer ou à acheter. 
+        Il permet également à des particuliers de même qu’à des entreprises de bénéficier d’un espace où faire la promotion de 
+        certains services ou produits qu’ils ont à offrir à leur communauté. </p>
+      </div><br/>
+    </section>
+
+    <section>
+        <ol style="opacity: 0.8; margin-top: 2.3%;">
+            <li>
+                <a th:href="@{/home}">
+                    <div class="icon">
+                      <i class="fa fa-home" aria-hidden="true"></i>
+                      <i class="fa fa-home" aria-hidden="true"></i>
+                    </div>
+                    <div class="name" data-text="Immobilier">Service Immobilier</div>
+                </a>
+            </li>
+
+            <li>
+              <a th:href="@{/professionnels}">
+                  <div class="icon">
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                  </div>
+                  <div class="name" data-text="Professionnel">Service Professionnel</div>
+              </a>
+          </li>
+
+<!--          <li>-->
+<!--            <a href="">-->
+<!--                <div class="icon">-->
+<!--                  <i class="fa fa-puzzle-piece" aria-hidden="true"></i>-->
+<!--                  <i class="fa fa-puzzle-piece" aria-hidden="true"></i>-->
+<!--                </div>-->
+<!--                <div class="name" data-text="Marketing">Service Marketing</div>-->
+<!--            </a>-->
+<!--          </li>-->
+        </ol>
+    </section>
+
+    <footer class="footer" style="margin-top: 9vh;">
+      <div class="container"><br><br><br><br><br><br>
+        <div class="row">
+          <div class="footer-col">
+            <h4>Sevis pam</h4>
+            <ul>
+              <li><a href="#">apropos de nous</a></li>
+              <li><a href="#">Notre services</a></li>
+              <li><a href="#">Politique de confidentialite</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Obtenir de l'aide</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Lorem ipsum</a></li>
+              <li><a href="#">Options de paiement</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Suivez-nous</h4>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+   </footer>
+  </body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sevis pam | Welcome</title>
+    <link rel="stylesheet" href="./css/styleGnle.css">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css">
+    <link rel="stylesheet" href=" https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div id="branding">
+          <h1><span class="highlight">Sevis</span> Pam</h1>
+        </div>
+        <nav>
+          <ul>
+            <li class="current"><a th:href="@{/index}">Accueil</a></li>
+            <li><a th:href="@{/about}">A propos</a></li>
+            <li><a th:href="@{/services}">Services</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <section id="showcase">
+      <div class="container">
+        <h1 class="h1">Sèvis Pam est à votre service</h1>
+        <p class="p">
+        SEVIS-PAM  est une plateforme numérique B2B, B2C (en version web et mobile) qui permet à des utilisateurs de ne plus 
+        avoir à se déplacer pour chercher un terrain, une chambre d’hôtel, un appartement ou une maison à louer ou à acheter. 
+        Il permet également à des particuliers de même qu’à des entreprises de bénéficier d’un espace où faire la promotion de 
+        certains services ou produits qu’ils ont à offrir à leur communauté. </p>
+      </div>
+    </section>
+    <section>
+    
+        <ol>
+            <li>
+                <a th:href="@{/home}">
+                    <div class="icon">
+                      <i class="fa fa-home" aria-hidden="true"></i>
+                      <i class="fa fa-home" aria-hidden="true"></i>
+                    </div>
+                    <div class="name" data-text="Immobilier">Service Immobilier</div>
+                </a>
+            </li>
+
+            <li>
+              <a th:href="@{/professionnels}">
+                  <div class="icon">
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+                  </div>
+                  <div class="name" data-text="Professionnel">Service Professionnel</div>
+              </a>
+          </li>
+
+          <li>
+            <a href="">
+                <div class="icon">
+                  <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
+                  <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
+                </div>
+                <div class="name" data-text="Marketing">Service Marketing</div>
+            </a>
+        </li>
+        </ol>
+    </section>
+
+    <footer class="footer">
+      <div class="container"><br><br><br><br><br><br>
+        <div class="row">
+          <div class="footer-col">
+            <h4>Sevis pam</h4>
+            <ul>
+              <li><a href="#">apropos de nous</a></li>
+              <li><a href="#">Notre services</a></li>
+              <li><a href="#">Politique de confidentialite</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Obtenir de l'aide</h4>
+            <ul>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Lorem ipsum</a></li>
+              <li><a href="#">Options de paiement</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Suivez-nous</h4>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+   </footer>
+  </body>
+</html>
+ -->

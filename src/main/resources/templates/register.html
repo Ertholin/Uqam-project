@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Sevis Pam</title>
+    <link rel="stylesheet" th:href="@{/css/styleInscription.css}">
+    <script src='https://code.jquery.com/jquery-3.2.1.js'></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
+    <link rel="stylesheet" th:href="@{/build/css/intlTelInput.css}">
+   <link rel="stylesheet" th:href="@{/build/css/demo.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="title"><a th:href="@{/index}" class="logo"><b><img
+					th:src="@{/libs/img/logos.png}"></b></a>S'inscrire</div>
+        <form method="POST" class="form-signin" th:object="${userForm}" th:action="@{/registration}" id="registration_form">
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Votre Nom</span>
+                    <input type="text" th:field="*{nom}" id="form_fname" placeholder="Entrer votre nom" required/>
+                    <span class="error_form" id="fname_error_message"></span>
+                </div>
+                <div class="input-box">
+                    <span class="details">Votre Prenom</span>
+                    <input type="text" th:field="*{prenom}" id="form_sname" placeholder="Entrer votre prenom" required/>
+                    <span class="error_form" id="sname_error_message"></span>
+                </div>
+                <div class="input-box">
+                    <span class="details">Votre Adresse</span>
+                    <input type="text" th:field="*{adresse}" id="form_adresse" placeholder="Entrer votre adresse" required/>
+                    <span class="error_form" id="adresse_error_message"></span>
+                </div>
+                <div class="input-box">
+                    <span class="details">Votre Email</span>
+                    <input type="text" th:field="*{user.email}" id="form_email" placeholder="Entrer votre email" required/>
+                    <span class="error_form" id="email_error_message"></span>
+                </div>
+                <div class="input-box">
+                    <span class="details">Votre Telephone</span>
+                    <input type="tel" id="form_phone" th:field="*{telephone}" name="telephone"  onkeypress="isInputNumber(event)" placeholder="5091111-1111" required/>
+                    <span class="error_form" id="phone_error_message"></span>
+                </div>
+                <div class="input-box">
+                    <span class="details">Votre Nom utilisateur</span>
+                    <input type="text" id="form_user" th:field="*{user.username}" placeholder="Entrer votre user" required/>
+                    <!-- <span class="error_form has-error" id="user_error_message" th:if="${#fields.hasErrors('user.username')}" th:errors="*{user.username}"></span> -->
+                    <span class="error_form has-error" id="user_error_message"></span>
+                </div>
+                <div class="input-box">
+                    <span class="details">Mot de passe</span>
+                    <input type="password" th:field="*{user.password}" id="form_password" placeholder="Entrer votre mot de passe" required/>
+                    <!-- <span class="error_form" id="password_error_message" th:if="${#fields.hasErrors('user.password')}" th:errors="*{user.password}"></span> -->
+               		<span class="error_form" id="password_error_message"></span>
+               	</div>
+                <div class="input-box">
+                    <span class="details">Confirmer mot de passe</span>
+                    <input type="password" th:field="*{user.passwordConfirm}" id="form_retype" placeholder="confirmre votre pass" required/>
+                    <!-- <span class="error_form has-error" id="retype_error_message" th:if="${#fields.hasErrors('user.passwordConfirm')}" th:errors="*{user.passwordConfirm}"></span> -->
+                    <span class="error_form has-error" id="retype_error_message"></span>
+                </div>
+                
+                
+<!--                 <div class="input-box">
+                    <span  class="details">Type de Compte: </span>
+                    	<th:block th:each="role : ${listRoles}">
+                    	<input type="checkbox" 
+                    		th:value="${role.id}"
+                    		th:text="${role.name}" th:field="*{user.roles}" class="m-2" style="width:34px; height:12px;">                    
+                </div> -->
+                
+                	<div class="input-box">
+                		<span  class="details">Type de Compte: </span>
+                		<select class="form-control" th:field="*{user.roles}">			    					   
+					       <option th:each="role : ${listRoles}"
+						        th:value="${role.id}"
+						        th:text="${role.name}">
+						   </option>
+					    </select>	
+                	</div>
+			    
+                
+                
+            </div>
+            <div class="gender-details">
+                <input type="radio" th:field="*{sexe}" value="Masculin" name="gender" id="dot-1" checked>
+                <input type="radio" th:field="*{sexe}" value="Feminin" name="gender" id="dot-2">
+                <input type="radio" th:field="*{sexe}" value="Autre" name="gender" id="dot-3">
+                <span class="gender-title">Sexe</span>
+                <div class="category">
+                    <label for="dot-1">
+                        <span class="dot one"></span>
+                        <span class="gender">Masculin</span>
+                    </label>
+                    <label for="dot-2">
+                        <span class="dot two"></span>
+                        <span class="gender">Feminin</span>
+                    </label>
+                    <label for="dot-3">
+                        <span class="dot three"></span>
+                        <span class="gender">Autre</span>
+                    </label>
+                </div>
+                <label for="dot-3">
+                    <input type="file" th:field="*{photo}" value="Photo" name="photo" class="form-control-file"/>
+                </label>
+                <div class="input-box">
+<!--                    <select th:field="*{roles}">-->
+<!--                        <option th:value="'Compte Proprietaire'" th:text="Compte Proprietaire"/>-->
+<!--                        <option th:value="'Compte Profesionnel'" th:text="Compte Proprietaire"/>-->
+<!--                        <option th:value="'Compte Marketing'" th:text="Compte Proprietaire"/>-->
+<!--                        <option th:value="'Compte Administrateur'" th:text="Compte Proprietaire"/>-->
+<!--                    </select>-->
+                </div>
+            </div>
+            
+            <div th:if="${param.success}" style="color:green; margin:10px 0px; text-align:center;">
+        		<div class="alert alert-danger">Enregistrement reussi! Cliquez sur le lien Connecter pour vous connecter </div>
+       		</div>
+            <div class="button">
+                <input type="submit" value="Envoyer"  name="">
+            </div>
+            <div class="text">Déjà un compte?<a th:href="@{/login}"> Connecter</a></div>
+
+            
+        </form>
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            $("#fname_error_message").hide();
+            $("#sname_error_message").hide();
+            $("#sexe_error_message").hide();
+            $("#adresse_error_message").hide();
+            $("#email_error_message").hide();
+            $("#phone_error_message").hide();
+            $("#user_error_message").hide();
+            $("#password_error_message").hide();
+            $("#retype_error_message").hide();
+
+            var error_fname = false;
+            var error_sname = false;
+            var error_sexe = false;
+            var error_adresse = false;
+            var error_email = false;
+            var error_phone = false;
+            var error_user = false;
+            var error_password = false;
+            var error_retype = false;
+
+            $("#form_fname").focusout(function(){
+                check_fname();
+            });
+            $("#form_sname").focusout(function(){
+                check_sname();
+            });
+            $("#form_sexe").focusout(function(){
+                check_sexe();
+            });
+            $("#form_adresse").focusout(function(){
+                check_adresse();
+            });
+            $("#form_email").focusout(function(){
+                check_email();
+            });
+            $("#form_phone").focusout(function(){
+                check_phone();
+            });
+            $("#form_user").focusout(function(){
+                check_user();
+            });
+            $("#form_password").focusout(function(){
+                check_password();
+            });
+            $("#form_retype").focusout(function(){
+                check_retype();
+            });
+
+            function check_fname(){
+                var pattern = /^[A-zA-Z]+(?:-?[A-zA-Z]+)+$/i;
+                //var pattern = /^(?:\\w|[\\-_ ](?![\\-_ ])|[\\u00C0\\u00C1\\u00C2\\u00C3\\u00C4\\u00C5\\u00C6\\u00C7\\u00C8\\u00C9\\u00CA\\u00CB\\u00CC\\u00CD\\u00CE\\u00CF\\u00D0\\u00D1\\u00D2\\u00D3\\u00D4\\u00D5\\u00D6\\u00D8\\u00D9\\u00DA\\u00DB\\u00DC\\u00DD\\u00DF\\u00E0\\u00E1\\u00E2\\u00E3\\u00E4\\u00E5\\u00E6\\u00E7\\u00E8\\u00E9\\u00EA\\u00EB\\u00EC\\u00ED\\u00EE\\u00EF\\u00F0\\u00F1\\u00F2\\u00F3\\u00F4\\u00F5\\u00F6\\u00F9\\u00FA\\u00FB\\u00FC\\u00FD\\u00FF\\u0153])+)$;
+                //var pattern = new RegExp("^((?:\\w|[\\-_ ](?![\\-_ ])|[\\u00C0\\u00C1\\u00C2\\u00C3\\u00C4\\u00C5\\u00C6\\u00C7\\u00C8\\u00C9\\u00CA\\u00CB\\u00CC\\u00CD\\u00CE\\u00CF\\u00D0\\u00D1\\u00D2\\u00D3\\u00D4\\u00D5\\u00D6\\u00D8\\u00D9\\u00DA\\u00DB\\u00DC\\u00DD\\u00DF\\u00E0\\u00E1\\u00E2\\u00E3\\u00E4\\u00E5\\u00E6\\u00E7\\u00E8\\u00E9\\u00EA\\u00EB\\u00EC\\u00ED\\u00EE\\u00EF\\u00F0\\u00F1\\u00F2\\u00F3\\u00F4\\u00F5\\u00F6\\u00F9\\u00FA\\u00FB\\u00FC\\u00FD\\u00FF\\u0153])+)$", "i");
+
+        		var fname =  $("#form_fname").val()
+                if(pattern.test(fname) && fname !== ''){
+                    $("#fname_error_message").hide();
+                    $("#form_fname").css("border-bottom","2px solid #34F458");
+                }else{
+                    $("#fname_error_message").html("Le nom est invalide!");
+                    $("#fname_error_message").show();
+                    $("#fname_error_message").css("border-bottom","2px solid #F90A0A");
+                    error_fname = true;
+                }
+            }
+            
+            function check_password(){
+                var password_length = $("#form_password").val().length;
+                if(password_length >= 8){
+                	$("#password_error_message").hide();
+                    $("#form_password").css("border-bottom","2px solid #34F458");
+                   
+                }else{
+                	 $("#password_error_message").html("Vous devez mettre aux moins 8 caracteres!");
+                     $("#password_error_message").show();
+                     $("#form_password").css("border-bottom","2px solid #F90A0A");
+                     error_password = true;
+                }
+            }
+
+            function check_sname(){
+                // var pattern = /^[A-zA-Z]*$/;
+                //var pattern = /^[A-zA-Z]+(?:-?[A-zA-Z]+)+$/i;
+                var pattern = new RegExp("^((?:\\w|[\\-_ ](?![\\-_ ])|[\\u00C0\\u00C1\\u00C2\\u00C3\\u00C4\\u00C5\\u00C6\\u00C7\\u00C8\\u00C9\\u00CA\\u00CB\\u00CC\\u00CD\\u00CE\\u00CF\\u00D0\\u00D1\\u00D2\\u00D3\\u00D4\\u00D5\\u00D6\\u00D8\\u00D9\\u00DA\\u00DB\\u00DC\\u00DD\\u00DF\\u00E0\\u00E1\\u00E2\\u00E3\\u00E4\\u00E5\\u00E6\\u00E7\\u00E8\\u00E9\\u00EA\\u00EB\\u00EC\\u00ED\\u00EE\\u00EF\\u00F0\\u00F1\\u00F2\\u00F3\\u00F4\\u00F5\\u00F6\\u00F9\\u00FA\\u00FB\\u00FC\\u00FD\\u00FF\\u0153])+)$", "i");
+                var sname =  $("#form_sname").val()
+                if(pattern.test(sname) && sname !== ''){
+                    $("#sname_error_message").hide();
+                    $("#form_sname").css("border-bottom","2px solid #34F458");
+                }else{
+                    $("#sname_error_message").html("Le prenom est invalide!");
+                    $("#sname_error_message").show();
+                    $("#sname_error_message").css("border-bottom","2px solid #F90A0A");
+                    error_sname = true;
+                }
+            }
+
+
+            function isInputNumber(evt){
+                var ch = String.fromCharCode(evt.which);
+                if(!(/[0=9] /.test(ch))){
+                    evt.preventDefault();
+                }
+            }
+
+            
+
+            function check_retype(){
+                var password = $("#form_password").val();
+                var retype_password = $("#form_retype").val();
+                if(password !==retype_password){
+                    $("#retype_error_message").html("Incompatible mot de passe!");
+                    $("#retype_error_message").show();
+                    $("#form_retype").css("border-bottom","2px solid #F90A0A");
+                    error_retype = true;
+                }else{
+                    $("#retype_error_message").hide();
+                    $("#form_retype").css("border-bottom","2px solid #34F458");
+                }
+            }
+
+            function check_email(){
+                var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                var email = $("#form_email").val();
+                if(pattern.test(email) && email !== ''){
+                    $("#email_error_message").hide();
+                    $("#form_email").css("border-bottom","2px solid #34F458");
+                }else{
+                    $("#email_error_message").html("Invalide email");
+                    $("#email_error_message").show();
+                    $("#form_email").css("border-bottom","2px solid #F90A0A");
+                    error_email = true;
+                }
+            }
+            
+            function check_phone(){
+                var pattern = /^\(?([0-9]{7})\)?[-. ]?([0-9]{4})?$/;
+                var phone = $("#form_phone").val();
+                if(pattern.test(phone) && phone !== ''){
+                    $("#phone_error_message").hide();
+                    $("#form_phone").css("border-bottom","2px solid #34F458");
+                }else{
+                    $("#phone_error_message").html("Invalide phone number");
+                    $("#phone_error_message").show();
+                    $("#form_phone").css("border-bottom","2px solid #F90A0A");
+                    error_phone = true;
+                }
+            }
+            
+            function check_user(){
+                // var pattern = /^[A-zA-Z]*$/;
+                var pattern = new RegExp("^((?:\\w|[\\-_ ](?![\\-_ ])|[\\u00C0\\u00C1\\u00C2\\u00C3\\u00C4\\u00C5\\u00C6\\u00C7\\u00C8\\u00C9\\u00CA\\u00CB\\u00CC\\u00CD\\u00CE\\u00CF\\u00D0\\u00D1\\u00D2\\u00D3\\u00D4\\u00D5\\u00D6\\u00D8\\u00D9\\u00DA\\u00DB\\u00DC\\u00DD\\u00DF\\u00E0\\u00E1\\u00E2\\u00E3\\u00E4\\u00E5\\u00E6\\u00E7\\u00E8\\u00E9\\u00EA\\u00EB\\u00EC\\u00ED\\u00EE\\u00EF\\u00F0\\u00F1\\u00F2\\u00F3\\u00F4\\u00F5\\u00F6\\u00F9\\u00FA\\u00FB\\u00FC\\u00FD\\u00FF\\u0153])+)$", "i");
+                var user =  $("#form_user").val()
+                if(pattern.test(user) && user !== ''){
+                    $("#user_error_message").hide();
+                    $("#form_user").css("border-bottom","2px solid #34F458");
+                }else{
+                    $("#user_error_message").html("Le nom d'utilisateur est invalide!");
+                    $("#user_error_message").show();
+                    $("#user_error_message").css("border-bottom","2px solid #F90A0A");
+                    error_user = true;
+                }
+            }
+
+
+            $("#registration_form").submit(function(){
+                var error_fname = false;
+                var error_sname = false;
+                var error_sexe = false;
+                var error_adresse = false;
+                var error_email = false;
+                var error_phone = false;
+                var error_user = false;
+                var error_password = false;
+                var error_retype = false;
+
+                check_fname();
+                check_sname();
+                check_sexe();
+                check_adresse();
+                check_email();
+                check_phone();
+                check_user();
+                check_password();
+                check_retype();
+
+                if(error_fname == false && error_sname == false && error_sexe == false && error_adresse == false && 
+                error_email == false && error_phone && error_user == false && error_password == false && error_retype == false){
+                    alert("Succès de l'enregistrement!");
+                    return true;
+                }else{
+                    alert("Veuillez de bien remplir le formulaire!");
+                    return false;
+                }
+            });
+        });
+    </script>
+     <script th:src="@{/build/js/intlTelInput.js}"></script>
+     <script>
+        var input = document.querySelector("#phone");
+        window.intlTelInput(input, {
+          utilsScript: "build/js/utils.js",
+        });
+      </script>
+</body>
+</html>

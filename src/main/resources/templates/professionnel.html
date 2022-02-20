@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="Dashboard">
+<meta name="keyword"
+	content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+<title>SevisPam management</title>
+
+<!-- Favicons -->
+<link th:href="@{/libs/img/favicon.png}" rel="icon">
+<link th:href="@{/libs/img/apple-touch-icon.png}" rel="apple-touch-icon">
+
+<!-- Bootstrap core CSS -->
+<link th:href="@{/libs/lib/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet">
+<!--external css-->
+<link th:href="@{/libs/lib/font-awesome/css/font-awesome.css}"
+	rel="stylesheet" />
+<link rel="stylesheet" type="text/css"
+	th:href="@{/libs/css/zabuto_calendar.css}">
+<link rel="stylesheet" type="text/css"
+	th:href="@{/libs/lib/gritter/css/jquery.gritter.css}" />
+<!-- Custom styles -->
+<link th:href="@{/libs/css/style.css}" rel="stylesheet">
+<link th:href="@{/libs/css/style-responsive.css}" rel="stylesheet">
+<script th:src="@{/libs/lib/chart-master/Chart.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+
+<!-- ============================================================================================================= -->
+</head>
+
+<body>
+	<section id="container">
+		<!--header start-->
+		<header class="header black-bg">
+			<div class="sidebar-toggle-box">
+				<div class="fa fa-bars tooltips" data-placement="right"
+					data-original-title="Toggle Navigation"></div>
+			</div>
+			<!--logo start-->
+			<a th:href="@{/index}" class="logo"><b><img
+					th:src="@{/libs/img/logos.png}"></b></a>
+			<!--logo end-->
+
+			<div sec:authorize="isAuthenticated()" class="top-menu">
+				<form id="logoutForm" method="POST" th:action="@{/logout}">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				</form>
+				<ul class="nav pull-right top-menu">
+					<li>
+						<a style="border-color: white;" class="logout" onclick="document.forms['logoutForm'].submit()"><i class="fa fa-sign-out" aria-hidden="true"></i>Deconnecter</a>
+					</li>
+				</ul>
+			</div>
+		</header>
+		<!--header end-->
+
+		<!--sidebar start-->
+		<aside>
+			<div id="sidebar" class="nav-collapse ">
+				<!-- sidebar menu start-->
+				<ul class="sidebar-menu" id="nav-accordion">
+					<p class="centered">
+						<a th:href="@{/profile.html}"><img
+							th:src="@{/libs/img/1.jpg}" class="img-circle" width="80"></a>
+					</p>
+					
+					<h5 class="centered" sec:authentication="name"> User</h5>
+					<h6 class="centered" sec:authentication="principal.authorities"> Roles</h6>
+					<!-- <h3 th:text="${#authentication.getPrincipal().getNom()}"></h3> -->
+					
+			<!-- <span sec:authorize="isAuthenticated()">
+                | Logged user: <span sec:authentication="name"></span> |
+                Roles: <span sec:authentication="principal.authorities"></span> |
+                <a th:href="@{/logout}">Sign Out</a>
+            </span> -->
+					
+					<li class="mt"><a class="active"
+						th:href="@{/professionnel}"> <i
+							class="glyphicon glyphicon-home"></i> <span>Accueil</span>
+					</a></li>
+					<li class="sub-menu"><a th:href="@{/infosProfessionnel}"> <i
+							class="fa fa-user-circle"></i> <span>Infos Personnels</span>
+					</a></li>
+					<li class="sub-menu"><a th:href="@{/mesProfiles}"> <i
+							class="fa fa-sitemap"></i> <span>Mes Profiles</span>
+					</a>
+						<!-- <ul class="sub">
+							<li><a th:href="@{/#}">Vendre</a></li>
+							<li><a th:href="@{/#}">Loueur</a></li>
+							<li><a th:href="@{/#}">Vacances</a></li>
+						</ul></li> -->
+					<li class="sub-menu"><a th:href="@{/addProfile}">
+							<i class="fa fa-plus-circle"></i> <span>Ajouter profile</span>
+					</a></li>
+					<li class="sub-menu"><a th:href="@{/javascript}"> <i
+							class="fa fa-cogs"></i> <span>Paramètres</span>
+					</a></li>
+				</ul>
+				<!-- sidebar menu end-->
+			</div>
+		</aside>
+		<!--sidebar end-->
+		<!-- ****************MAIN CONTENT******************************************************************************************************* -->
+<!-- 	<tbody>
+							<tr th:each="profile : ${profiles}">
+								<td th:utext="${profile.username}"></td>
+								<td th:utext="${profile.bio}">...</td>
+								<td th:utext="${profile.profession}">...</td>
+								<td th:utext="${profile.email}">...</td>
+								<td th:utext="${profile.dateNaissance}">...</td>
+								<td th:utext="${profile.photo}"></td>
+								<td><img alt="" th:src="@{${profile.photoImagePath}}" width="135px" height="135px"></td>
+								<td><img id="thumbnail" alt="Logo Preview" width="35px" height="35px"/></td>
+								<td>
+								
+								<img th:src="/@{${profile.photosImagePath}}" />
+ 									<a type="button" class="btn btn-default btn-space" href="">  
+										<i class="fa fa-eye" aria-hidden="true"></i>Voir
+									</a>
+									<a type="button" class="btn btn-primary btn-space" id="editButton" th:href="@{/profiles/findById/(id=${profile.id})}">
+										<i class="fa fa-pencil" aria-hidden="true"></i>Modifier
+									</a>
+									<a type="button" class="btn btn-danger btn-space" id="deleteButton" th:href="@{/deleteProp/{id}(id=${propriete.id})}">
+										<i class="fa fa-remove" aria-hidden="true"></i>Supprimer
+									</a> 
+								</td>   -->
+ -->	
+		<section id="main-content">
+			<section class="wrapper">
+				<div class="row">
+					<h2 align="center">Mes Profiles</h2>
+					
+					<div class="container-fluid bootstrap snippets bootdeys" th:each="profile : ${profiles}">
+						<div class="row">
+						    <div class="col-lg-3 col-md-3 col-sm-4">
+						        <div class="panel rounded shadow">
+						            <div class="panel-body">
+						                <div class="inner-all">
+						                    <ul class="list-unstyled">
+						                        <li class="text-center">
+						                            <img data-no-retina="" class="img-circle img-responsive img-bordered-primary" th:src="@{${profile.photoImagePath}}" alt="John Doe">
+						                        </li>
+						                        <li class="text-center">
+						                            <h4 class="text-capitalize" th:utext="${profile.username}">John Doe</h4>
+						                            <p class="text-muted text-capitalize" th:utext="${profile.profession}">web designer</p>
+						                        </li>
+						                        <!-- <li>
+						                            <a href="" class="btn btn-primary text-center btn-block">Informations Personnelles</a>
+						                        </li> -->
+						                        <li><br></li>
+						                        <li>
+						                            <div class="btn-group-vertical btn-block">
+						                                <a type="button" id="editButton" th:href="@{/profiles/findById/(id=${profile.id})}" class="btn btn-default"><i class="fa fa-cog pull-right"></i>Modifier Compte</a>
+						                                <a type="button" id="deleteButton" th:href="@{/deleteProfile/{id}(id=${profile.id})}" class="btn btn-default"><i class="fa fa-remove pull-right"></i>Supprimer Compte</a>
+<!-- 						                                <a href="" class="btn btn-default"><i class="fa fa-cog pull-right"></i>Modifier Informations Personnelles</a>
+ -->						                                <!-- <a href="" class="btn btn-default"><i class="fa fa-sign-out pull-right"></i>Logout</a> -->
+						                            </div>
+						                        </li>
+						                    </ul>
+						                </div>
+						            </div>
+						        </div><!-- /.panel -->
+						
+						        <div class="panel panel-theme rounded shadow">
+						            <div class="panel-heading">
+						                <div class="pull-left">
+						                    <h3 class="panel-title">Contact</h3>
+						                </div>
+						                <div class="pull-right">
+						                    <a th:href="'https://facebook.com/'+${profile.facebook}" class="btn btn-sm btn-primary"><i class="fa fa-facebook"></i></a>
+						                    <a th:href="'https://twitter.com/'+${profile.twitter}" class="btn btn-sm btn-primary"><i class="fa fa-twitter"></i></a>
+						                    <a th:href="'https://linkedin.com/'+${profile.linkedin}" class="btn btn-sm btn-primary"><i class="fa fa-linkedin"></i></a>
+						                </div>
+						                <div class="clearfix"></div>
+						            </div><!-- /.panel-heading -->
+						            <div class="panel-body no-padding rounded">
+						                <ul class="list-group no-margin">
+						                    <li class="list-group-item"><i class="fa fa-envelope mr-5"></i> <span th:utext="${profile.email}"></span> </li>
+						                    <li class="list-group-item"><i class="fa fa-globe mr-5"></i> <span th:utext="${profile.site}"></span> </li>
+						                    <li class="list-group-item"><i class="fa fa-phone mr-5"></i> <span th:utext="'+'+${profile.telephone}"></span> </li>
+						                </ul>
+						            </div><!-- /.panel-body -->
+						        </div><!-- /.panel -->
+						
+						    </div>
+						    <div class="col-lg-9 col-md-9 col-sm-8">
+						
+						    <div class="profile-cover">
+						        <div class="cover rounded shadow no-overflow">
+						            <div class="inner-cover">
+						                <!-- Start offcanvas btn group menu: This menu will take position at the top of profile cover (mobile only). -->
+
+						                <img  th:src="@{/img/profilebg.jpg}" class="img-responsive full-width" alt="cover" style="max-height:200px;">
+						            </div>
+
+						        </div><!-- /.cover -->
+						    </div><!-- /.profile-cover -->
+						    <div class="divider"></div>
+						    <div class="panel rounded shadow">
+<!-- 						        <form action="...">
+						            <textarea class="form-control input-lg no-border" rows="2" placeholder="What are you doing?..."></textarea>
+						        </form> -->
+						        <div class="panel-footer">
+						            <span class="pull-right mt-5"  th:utext="${profile.profileDate}"> </span>
+						            <ul class="nav nav-pills">
+						            	<li><img th:src="@{${profile.photoImagePath}}" alt="..." class="img-circle img-post"></li>
+						            	<li><a href="#" class="media-heading block mb-0 h4 text-white" th:utext="${profile.username}">John Doe</a></li>
+						                
+						            </ul><!-- /.nav nav-pills -->
+						           	<p th:utext="${profile.bio}"></p>
+						        </div><!-- /.panel-footer -->
+						    </div><!-- /.panel -->   
+						</div>
+						
+						
+						 <div class="col-lg-9 col-md-9 col-sm-8">
+					
+						    <div class="divider"></div>
+						    <div class="panel rounded shadow">
+<!-- 						        <form action="...">
+						            <textarea class="form-control input-lg no-border" rows="2" placeholder="What are you doing?..."></textarea>
+						        </form> -->
+						        <div class="panel-footer">
+						            
+						            <ul class="nav nav-pills">
+						            	<li><span class="media-heading block mb-0 h4 text-white"><i class="fa fa-map-marker"></i> Adresse</span></li>
+						                
+						            </ul><!-- /.nav nav-pills -->
+						           	<p th:utext="${profile.departement}+', '+${profile.commune}+', '+${profile.adresse}"></p>
+						        </div><!-- /.panel-footer -->
+						    </div><!-- /.panel -->   
+						</div>
+						</div>
+						</div>
+						</div>
+						</section>
+						</section>
+						</section>
+						
+					
+			
+<!-- 				<div class="container-fluid table-responsive-sm">
+					<table border="1" align="center" class="table table-striped table-hover">
+						<thead class="thead-dark">
+							<tr>
+								<th scope="col">Nom Professionnel</th>
+								<th scope="col">Statut</th>
+								<th scope="col">Localisation</th>
+								<th scope="col">Description</th>
+								<th scope="col">Prix</th>
+								<th scope="col">Photo</th>
+								<th scope="col">Actions</th>
+								<th><input type="file" class="form-control choose-file" name="fileImage" id="fileImage" accept="image/png, image/jpeg"></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="profile : ${profiles}">
+								<td th:utext="${profile.username}"></td>
+								<td th:utext="${profile.bio}">...</td>
+								<td th:utext="${profile.profession}">...</td>
+								<td th:utext="${profile.email}">...</td>
+								<td th:utext="${profile.dateNaissance}">...</td>
+								<td th:utext="${profile.photo}"></td>
+								<td><img alt="" th:src="@{${profile.photoImagePath}}" width="135px" height="135px"></td>
+								<td><img id="thumbnail" alt="Logo Preview" width="35px" height="35px"/></td>
+								<td>
+								
+								<img th:src="/@{${profile.photosImagePath}}" />
+ 									<a type="button" class="btn btn-default btn-space" href="">  
+										<i class="fa fa-eye" aria-hidden="true"></i>Voir
+									</a>
+									<a type="button" class="btn btn-primary btn-space" id="editButton" th:href="@{/profiles/findById/(id=${profile.id})}">
+										<i class="fa fa-pencil" aria-hidden="true"></i>Modifier
+									</a> -->
+<!-- 									<a type="button" class="btn btn-danger btn-space" id="deleteButton" th:href="@{/deleteProp/{id}(id=${propriete.id})}">
+										<i class="fa fa-remove" aria-hidden="true"></i>Supprimer
+									</a>  -->
+								<!-- </td>
+								
+									<div class="btn-group">
+			                    		<a th:href="@{/proprietes/findById/(id=${propriete.id})}" class="btn btn-primary" id="editButton"><i class="icon_pencil-edit"></i></a>
+					               		<a class="btn btn-success" id="detailsButton"><i class="icon_document_alt"></i></a>
+					               		<a th:href="@{/deleteProp/{id}(id=${propriete.id})}" class="btn btn-danger" id="deleteButton"><i class="icon_close_alt2"></i></a>
+	                    			</div>
+								
+							</tr>
+						</tbody>
+					</table>
+				</div> -->
+					<!-- <div>
+						<p>
+							| <br> | <br> | <br> | <br> | <br> | <br>
+							| <br> |
+						</p>
+						<p>
+							| <br> | <br> | <br> | <br> | <br> |
+						</p>
+					</div> -->
+<!-- 
+				</div>
+				/row
+			</section>
+		</section> -->
+		<!--main content end-->
+		<!--footer start-->
+<!-- 		<footer class="site-footer">
+			<div class="text-center">
+				<p>
+					&copy; Copyrights <strong>Sevispam</strong>. Tous droits reserves
+				</p>
+				<div class="credits">
+					Creer par Mind-Soft <a th:href="@{/https://sevispam.com/}">Entreprise</a>
+				</div>
+				<a th:href="@{/index.html}" class="go-top"> <i
+					class="fa fa-angle-up"></i>
+				</a>
+			</div>
+		</footer> -->
+		<!--footer end-->
+	<!-- </section> -->
+	
+	<!-- Starting Modals -->
+	
+ <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifier Propriété</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form th:action="@{/profiles/update}" method="put" enctype="multipart/form-data">
+        		
+        			   <div class="form-group">
+			            <label for="recipient-name" class="col-form-label">Id:</label>
+			            <input type="text" class="form-control" id="idEdit" name = "id" readonly>
+			          </div>
+							
+											
+					  <div class="form-group">
+					    <label for="txtUsernameEdit" class="col-form-label">Nom Professionnel/ Nom Entreprise: </label>
+					    <input type="text" class="form-control" id="txtUsernameEdit" name="username" placeholder="Username" required>
+					  </div>
+					  
+					 <div class="form-group">
+					    <label for="txtBioEdit" class="col-form-label">Bio</label>
+					      <textarea class="form-control" id="txtBioEdit" name="bio" placeholder="Bio" rows="2"></textarea>
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtTelephoneEdit" class="col-form-label">Téléphone Professionnel: </label>
+					      <input type="tel" class="form-control" id="txtTelephoneEdit" name="telephone" placeholder="50931111111"  required>
+					  </div>
+					  
+					 <div class="form-group">
+					    <label for="ddlDepartementEdit" class="col-form-label">Département: </label>
+						    <select class="form-control" id="ddlDepartementEdit" name="departement"  required>
+						          <option>-SELECT-</option>
+						          <option>Ouest</option>
+	  							  <option>Nord</option>
+	  							  <option>Sud</option>
+	  							  <option>Est</option>
+	  							  <option>Sud-Est</option>
+	  							  <option>Nippes</option>
+	  							  <option>Grand'Anse</option>
+	  							  <option>Centre</option>
+	  							  <option>Nord-Ouest</option>
+	  							  <option>Nord-Est</option>
+						    </select>			
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtCommuneEdit" class="col-form-label">Commune: </label>
+					      <input type="text" class="form-control" id="txtCommuneEdit" name="commune" placeholder="Commune" required>
+					  </div>
+					  
+					  
+					  
+					  <div class="form-group">
+					    <label for="txtAddressEdit" class="col-form-label">Address</label>
+					      <textarea class="form-control" id="txtAddressEdit" name="adresse" placeholder="Address" rows="2"  required></textarea>
+					  </div>
+					  
+
+					  
+					<div class="form-group">
+					    <label for=ddProfessionEdit class="col-form-label">Profession: </label>
+						    <select class="form-control" id="ddProfessionEdit" name="profession"  required>
+						          <option>-SELECT-</option>
+						          <option>Mécanicien</option>
+	  							  <option>Electricien Auto</option>
+	  							  <option>Electricien Bâtiment</option>
+	  							  <option>Plombier</option>
+	  							  <option>Menuisier</option>
+	  							  <option>Pâtissier(ère)</option>
+	  							  <option>Infirmier(ère)</option>
+	  							  <option>Auxilière Infirmier(ère)</option>
+	  							  <option>Masseur</option>
+	  							  <option>Photographe</option>
+	  							  <option>Vidéographe</option>
+	  							  <option>Maquilleur(e)</option>
+	  							  <option>Ingénieur Civil</option>
+	  							  <option>Maçon</option>
+	  							  <option>Carréleur</option>
+	  							  <option>Electronicien</option>
+	  							  <option>Technicien Informatique</option>
+	  							  <option>Dépanneur Cellulaire</option>
+	  							  <option>Jardinière</option>
+	  							  <option>Instituteur</option>
+	  							  <option>Fleuriste</option>
+	  							  <option>Couturier(ère)</option>
+	  							  <option>Ferailleur</option>
+	  							  <option>Dépanneur Cellulaire</option>
+	  							  <option>Secrétaire Bureautique</option>
+	  							  <option>Estéticien</option>
+	  							  <option>Blanchisseur</option>
+	  							  <option>Technicien de Laboratoire Médicale</option>
+	  							  <option>Blanchisseur</option>
+	  							  <option>Maquilleur</option>
+	  							  <option>Danseur(euse)</option>
+	  							  <option>Moniteur Sportif</option>
+	  							  <option>Macrameur</option>
+	  							  <option>Calligraphe</option>
+	  							  <option>Potier(ère)</option>
+	  							  <option>Hetellier(ère)</option>
+	  							  <option>Beat Maker</option>
+	  							  <option>DJ</option>
+						    </select>	
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="dateNaissanceEdit" class="col-form-label">Date de Naissance:</label>
+					      <input type="date" class="form-control" id="dateNaissanceEdit" name="dateNaissance">
+					  </div>
+	
+					  <div class="form-group">
+					    <label for="txtEmailEdit" class="col-form-label">Email Professionnel</label>
+					      <input type="email" class="form-control" id="txtEmailEdit" name="email" placeholder="Email"  required>
+					  </div>
+					  
+					 <div class="form-group">
+					    <label for="txtSiteEdit" class="col-form-label">Site Internet: </label>
+					      <input type="text" class="form-control" id="txtSiteEdit" name="site" placeholder="l'URL de votre Site Internet">
+					 </div>
+					 
+					 <div class="form-group">
+					    <label for="txtLinkedinEdit" class="col-form-label">Compte LinkedIn: </label>
+					      <input type="text" class="form-control" id="txtLinkedinEdit" name="linkedin" placeholder="Compte Linkedin">
+					  </div>
+					  
+					 <div class="form-group">
+					    <label for="txtFacebookEdit" class="col-form-label">Page Facebook: </label>
+					      <input type="text" class="form-control" id="txtFacebookEdit" name="facebook" placeholder="Page Facebook">
+					  </div>
+					  
+					  <div class="form-group">
+					    <label for="txtFacebookEdit" class="col-form-label">Photo existante: </label>
+					      <input type="text" class="form-control" id="txtImageEdit">
+					  </div>
+					  
+			<div class="form-group">
+				<label for="fileImage" class="col-form-label">Nouvelle Photo</label>
+					<input type="file" class="form-control" name="file" id="txtImageEdit" accept="image/png, image/jpeg">
+			</div>
+
+
+         
+          
+          <div class="form-group">
+            <input type="hidden" class="form-control" id="proprietaireIdEdit" name = "proprietaire">
+          </div>
+          <div class="form-group">
+            <input type="hidden" class="form-control" id="dateEdit" name = "date">
+          </div>
+          
+          <div class="form-group">
+        	<button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+          
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
+  <div class="modal" id="deleteModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Voulez-vous vraiment supprimer cet enregistrement ?</p>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-primary" id = "confirmDeleteButton" href="">Oui, Confirmer</a>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+      </div>
+    </div>
+  </div>
+</div> 	
+	
+	<!-- js placed at the end of the document so the pages load faster -->
+	<script th:src="@{/libs/lib/jquery/jquery.min.js}"></script>
+
+	<script th:src="@{/libs/lib/bootstrap/js/bootstrap.min.js}"></script>
+	<script class="include" type="text/javascript"
+		th:src="@{/lib/jquery.dcjqaccordion.2.7.js}"></script>
+	<script th:src="@{/libs/lib/jquery.scrollTo.min.js}"></script>
+	<script th:src="@{/libs/lib/jquery.nicescroll.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/libs/lib/jquery.sparkline.js}"></script>
+	<!--common script for all pages-->
+	<script th:src="@{/libs/lib/common-scripts.js}"></script>
+	<script type="text/javascript"
+		th:src="@{/libs/lib/gritter/js/jquery.gritter.js}"></script>
+	<script type="text/javascript" th:src="@{/libs/lib/gritter-conf.js}"></script>
+	<!--script for this page-->
+	<script th:src="@{/libs/lib/sparkline-chart.js}"></script>
+	<script th:src="@{/libs/lib/zabuto_calendar.js}"></script>
+	<script src="js/profile.js"></script>
+	<script type="text/javascript">
+		$(document)
+				.ready(
+						function() {
+							
+							$('#fileImage').change(function(){
+								showImageThumbnail(this);
+							});	
+							
+							var unique_id = $.gritter
+									.add({
+										// (string | mandatory) the heading of the notification
+										title : 'Bienvenue!',
+										// (string | mandatory) the text inside the notification
+										text : 'Nous vous remercions de choisir Sevis Pam comme plateforme numerique pour votre business. Placer le curseur sur le message pour pouvoir annuler',
+										// (string | optional) the image to display on the left
+										image : '../libs/img/1.jpg',
+										// (bool | optional) if you want it to fade out on its own or just sit there
+										sticky : false,
+										// (int | optional) the time you want it to be alive for before fading out
+										time : 8000,
+										// (string | optional) the class name you want to apply to that specific message
+										class_name : 'my-sticky-class'
+									});
+
+							return false;
+							
+		
+							
+					});
+		
+		function showImageThumbnail(fileInput){
+			file = fileInput.files[0];
+			reader = new FileReader();
+			reader.onload = function(e){
+				$('#thumbnail').attr('src', e.target.result);
+				
+			};
+			reader.readAsDataURL(file);
+		}
+		
+		
+	</script>
+	<script type="application/javascript">
+		
+    $(document).ready(function() {
+      $("#date-popover").popover({
+        html: true,
+        trigger: "manual"
+      });
+      $("#date-popover").hide();
+      $("#date-popover").click(function(e) {
+        $(this).hide();
+      });
+
+      $("#my-calendar").zabuto_calendar({
+        action: function() {
+          return myDateFunction(this.id, false);
+        },
+        action_nav: function() {
+          return myNavFunction(this.id);
+        },
+        ajax: {
+          url: "show_data.php?action=1",
+          modal: true
+        },
+        legend: [{
+            type: "text",
+            label: "Special event",
+            badge: "00"
+          },
+          {
+            type: "block",
+            label: "Regular event",
+          }
+        ]
+      });
+    });
+
+    function myNavFunction(id) {
+      $("#date-popover").hide();
+      var nav = $("#" + id).data("navigation");
+      var to = $("#" + id).data("to");
+      console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+    }
+    
+	
+  
+	</script>
+	
+	<style type="text/css">
+body{margin-top:20px;
+background:#eee;
+}
+
+.divider {
+  height: 20px;
+  display: block;
+}
+
+/* ========================================================================
+ * FORM MISC
+ * ======================================================================== */
+.input-group-addon {
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  min-width: 39px;
+}
+.input-group-addon .ckbox, .input-group-addon .rdio {
+  position: absolute;
+  top: 4px;
+  left: 10px;
+}
+
+.input-group-lg > .form-control, .input-group-lg > .input-group-addon, .input-group-lg > .input-group-btn > .btn, .input-group-sm > .form-control, .input-group-sm > .input-group-addon, .input-group-sm > .input-group-btn > .btn, .input-group-xs > .form-control, .input-group-xs > .input-group-addon, .input-group-xs > .input-group-btn > .btn {
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+
+.input-sm, .form-group-sm .form-control {
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+}
+
+.form-control {
+  -moz-border-radius: 0px;
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+@media (max-width: 640px) {
+  .form-inner-all [class*="col-"]:last-child .form-control {
+    margin-top: 15px;
+  }
+}
+
+
+/* ========================================================================
+ * PROFILE
+ * ======================================================================== */
+.profile-cover {
+  width: 100%;
+}
+.profile-cover .cover {
+  position: relative;
+  border: 10px solid #FFF;
+}
+.profile-cover .cover .inner-cover {
+  overflow: hidden;
+  height: auto;
+}
+.profile-cover .cover .inner-cover img {
+  border: 1px solid transparent;
+  text-align: center;
+  width: 100%;
+}
+.profile-cover .cover .inner-cover .cover-menu-mobile {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.profile-cover .cover .inner-cover .cover-menu-mobile button i {
+  font-size: 17px;
+}
+.profile-cover .cover ul.cover-menu {
+  padding-left: 150px;
+  position: absolute;
+  overflow: hidden;
+  left: 1px;
+  float: left;
+  bottom: 0px;
+  width: 100%;
+  margin: 0px;
+  background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.24);
+}
+.profile-cover .cover ul.cover-menu li {
+  display: block;
+  float: left;
+  margin-right: 0px;
+  padding: 0px 10px;
+  line-height: 40px;
+  height: 40px;
+  -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.profile-cover .cover ul.cover-menu li:hover {
+  background-color: rgba(0, 0, 0, 0.44);
+}
+.profile-cover .cover ul.cover-menu li.active {
+  background-color: rgba(0, 0, 0, 0.64);
+}
+.profile-cover .cover ul.cover-menu li a {
+  color: #FFF;
+  font-weight: bold;
+  display: block;
+  height: 40px;
+  line-height: 40px;
+  text-decoration: none;
+}
+.profile-cover .cover ul.cover-menu li a i {
+  font-size: 18px;
+}
+.profile-cover .profile-body {
+  margin: 0px auto 10px;
+  position: relative;
+}
+.profile-cover .profile-timeline {
+  padding: 15px;
+}
+.img-post{
+    width:30px;
+    height:30px;
+}
+.img-post2{
+    width:50px;
+    height:50px;
+}
+</style>
+
+<script type="text/javascript">
+
+</script>
+</body>
+
+</html>
